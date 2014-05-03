@@ -1,0 +1,79 @@
+NAME
+    ExtUtils::BundleMaker - Supports making bundles of modules
+
+SYNOPSIS
+    Quick summary of what the module does.
+
+    Perhaps a little code snippet.
+
+        use ExtUtils::BundleMaker;
+
+        my $eu_bm = ExtUtils::BundleMaker->new(
+            modules => [ 'Important::One', 'Mandatory::Dependency' ],
+            # can be omitted when prerequisites are appropriate
+            also => {
+                modules => [ 'Significant::Dependency' ],
+            },
+            # down to which perl version core modules shall be included?
+            recurse => 'v5.10',
+        );
+        # create bundle
+        $eu_bm->make_bundle( 'inc/foo_bundle.pl' );
+
+ATTRIBUTES
+    Following attributes are supported by ExtUtils::BundleMaker
+
+  modules
+    Specifies name of module(s) to create bundle for
+
+  also
+    Specifies list of more bundles to include (recursively)
+
+  target
+    Specifies target for bundle
+
+METHODS
+  make_bundle
+AUTHOR
+    Jens Rehsack, "<rehsack at cpan.org>"
+
+BUGS
+    Please report any bugs or feature requests to "bug-extutils-bundlemaker
+    at rt.cpan.org", or through the web interface at
+    <http://rt.cpan.org/NoAuth/ReportBug.html?Queue=ExtUtils-BundleMaker>. I
+    will be notified, and then you'll automatically be notified of progress
+    on your bug as I make changes.
+
+SUPPORT
+    You can find documentation for this module with the perldoc command.
+
+        perldoc ExtUtils::BundleMaker
+
+    You can also look for information at:
+
+    *   RT: CPAN's request tracker (report bugs here)
+
+        <http://rt.cpan.org/NoAuth/Bugs.html?Dist=ExtUtils-BundleMaker>
+
+    *   AnnoCPAN: Annotated CPAN documentation
+
+        <http://annocpan.org/dist/ExtUtils-BundleMaker>
+
+    *   CPAN Ratings
+
+        <http://cpanratings.perl.org/d/ExtUtils-BundleMaker>
+
+    *   Search CPAN
+
+        <http://search.cpan.org/dist/ExtUtils-BundleMaker/>
+
+ACKNOWLEDGEMENTS
+LICENSE AND COPYRIGHT
+    Copyright 2014 Jens Rehsack.
+
+    This program is free software; you can redistribute it and/or modify it
+    under the terms of either: the GNU General Public License as published
+    by the Free Software Foundation; or the Artistic License.
+
+    See <http://dev.perl.org/licenses/> for more information.
+

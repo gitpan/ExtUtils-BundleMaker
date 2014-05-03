@@ -1,0 +1,41 @@
+---
+abstract: 'Supports making bundles of modules'
+author:
+  - 'Jens Rehsack <rehsack@cpan.org>'
+build_requires:
+  Test::More: '0.90'
+  Test::WriteVariants: '0.005'
+configure_requires:
+  Module::Build: '0.42'
+dynamic_config: 1
+generated_by: 'Module::Build version 0.4205, CPAN::Meta::Converter version 2.140640'
+license: perl
+meta-spec:
+  url: http://module-build.sourceforge.net/META-spec-v1.4.html
+  version: '1.4'
+name: ExtUtils-BundleMaker
+provides:
+  ExtUtils::BundleMaker:
+    file: lib/ExtUtils/BundleMaker.pm
+    version: '0.001'
+recommends:
+  CHI: '0'
+  HTTP::Tiny::Mech: '0'
+  WWW::Mechanize::Cached: '0'
+requires:
+  File::Basename: '0'
+  File::Path: '0'
+  File::Slurp: '0'
+  File::Spec: '0'
+  MetaCPAN::Client: '0'
+  Module::CoreList: '0'
+  Module::Runtime: '0'
+  Moo: '0'
+  MooX::ConfigFromFile: '0'
+  MooX::Options: '4.000'
+  Params::Util: '0'
+  version: '0'
+resources:
+  license: http://dev.perl.org/licenses/
+  repository: git://github.com/rehsack/ExtUtils-BundleMaker.git
+version: '0.001'

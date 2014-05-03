@@ -1,0 +1,12 @@
+bin/bundlemaker
+Build.PL
+Changes
+lib/ExtUtils/BundleMaker.pm
+MANIFEST
+MANIFEST.SKIP
+README.md
+t/00-load.t
+t/01-simple.t
+README
+META.yml
+META.json

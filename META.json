@@ -1,0 +1,77 @@
+{
+   "abstract" : "Supports making bundles of modules",
+   "author" : [
+      "Jens Rehsack <rehsack@cpan.org>"
+   ],
+   "dynamic_config" : 1,
+   "generated_by" : "Module::Build version 0.4205",
+   "license" : [
+      "perl_5"
+   ],
+   "meta-spec" : {
+      "url" : "http://search.cpan.org/perldoc?CPAN::Meta::Spec",
+      "version" : 2
+   },
+   "name" : "ExtUtils-BundleMaker",
+   "prereqs" : {
+      "build" : {
+         "requires" : {
+            "Test::More" : "0.90",
+            "Test::WriteVariants" : "0.005"
+         }
+      },
+      "configure" : {
+         "requires" : {
+            "Module::Build" : "0.42"
+         }
+      },
+      "develop" : {
+         "requires" : {
+            "Test::CPAN::Changes" : 0,
+            "Test::CheckManifest" : 0,
+            "Test::Pod" : 0,
+            "Test::Pod::Coverage" : 0,
+            "Test::Pod::Spelling::CommonMistakes" : 0
+         }
+      },
+      "runtime" : {
+         "recommends" : {
+            "CHI" : 0,
+            "HTTP::Tiny::Mech" : 0,
+            "WWW::Mechanize::Cached" : 0
+         },
+         "requires" : {
+            "File::Basename" : 0,
+            "File::Path" : 0,
+            "File::Slurp" : 0,
+            "File::Spec" : 0,
+            "MetaCPAN::Client" : 0,
+            "Module::CoreList" : 0,
+            "Module::Runtime" : 0,
+            "Moo" : 0,
+            "MooX::ConfigFromFile" : 0,
+            "MooX::Options" : "4.000",
+            "Params::Util" : 0,
+            "version" : 0
+         }
+      }
+   },
+   "provides" : {
+      "ExtUtils::BundleMaker" : {
+         "file" : "lib/ExtUtils/BundleMaker.pm",
+         "version" : "0.001"
+      }
+   },
+   "release_status" : "stable",
+   "resources" : {
+      "license" : [
+         "http://dev.perl.org/licenses/"
+      ],
+      "repository" : {
+         "type" : "git",
+         "url" : "git://github.com/rehsack/ExtUtils-BundleMaker.git",
+         "web" : "https://github.com/rehsack/ExtUtils-BundleMaker"
+      }
+   },
+   "version" : "0.001"
+}
