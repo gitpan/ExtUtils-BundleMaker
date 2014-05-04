@@ -1,12 +1,12 @@
 {
-   "abstract" : "Supports making bundles of modules",
+   "abstract" : "Supports making bundles of modules recursively",
    "author" : [
       "Jens Rehsack <rehsack@cpan.org>"
    ],
    "dynamic_config" : 1,
    "generated_by" : "Module::Build version 0.4205",
    "license" : [
-      "perl_5"
+      "unknown"
    ],
    "meta-spec" : {
       "url" : "http://search.cpan.org/perldoc?CPAN::Meta::Spec",
@@ -46,7 +46,7 @@
             "File::Slurp" : 0,
             "File::Spec" : 0,
             "MetaCPAN::Client" : 0,
-            "Module::CoreList" : 0,
+            "Module::CoreList" : "2.99",
             "Module::Runtime" : 0,
             "Moo" : 0,
             "MooX::ConfigFromFile" : 0,
@@ -59,11 +59,15 @@
    "provides" : {
       "ExtUtils::BundleMaker" : {
          "file" : "lib/ExtUtils/BundleMaker.pm",
-         "version" : "0.001"
+         "version" : "0.003"
       }
    },
    "release_status" : "stable",
    "resources" : {
+      "bugtracker" : {
+         "mailto" : "bug-extutils-bundlemaker@rt.cpan.org",
+         "web" : "http://rt.cpan.org/NoAuth/ReportBug.html?Queue=ExtUtils-BundleMaker"
+      },
       "license" : [
          "http://dev.perl.org/licenses/"
       ],
@@ -73,5 +77,5 @@
          "web" : "https://github.com/rehsack/ExtUtils-BundleMaker"
       }
    },
-   "version" : "0.001"
+   "version" : "0.003"
 }

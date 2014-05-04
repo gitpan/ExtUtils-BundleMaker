@@ -1,24 +1,25 @@
 NAME
-    ExtUtils::BundleMaker - Supports making bundles of modules
+    ExtUtils::BundleMaker - Supports making bundles of modules recursively
 
 SYNOPSIS
-    Quick summary of what the module does.
-
-    Perhaps a little code snippet.
-
         use ExtUtils::BundleMaker;
 
         my $eu_bm = ExtUtils::BundleMaker->new(
             modules => [ 'Important::One', 'Mandatory::Dependency' ],
-            # can be omitted when prerequisites are appropriate
-            also => {
-                modules => [ 'Significant::Dependency' ],
-            },
             # down to which perl version core modules shall be included?
             recurse => 'v5.10',
+            target => 'inc/bundle.inc',
         );
         # create bundle
-        $eu_bm->make_bundle( 'inc/foo_bundle.pl' );
+        $eu_bm->make_bundle();
+
+DESCRIPTION
+    ExtUtils::BundleMaker is designed to support authors automatically
+    create a bundle of important prerequisites which aren't needed outside
+    of the distribution but might interfere or overload target.
+
+    Because of no dependencies are recorded within a distribution, entire
+    distributions of recorded dependencies are bundled.
 
 ATTRIBUTES
     Following attributes are supported by ExtUtils::BundleMaker
@@ -26,11 +27,11 @@ ATTRIBUTES
   modules
     Specifies name of module(s) to create bundle for
 
-  also
-    Specifies list of more bundles to include (recursively)
-
   target
     Specifies target for bundle
+
+  recurse
+    Specify the Perl core version to recurse until.
 
 METHODS
   make_bundle
