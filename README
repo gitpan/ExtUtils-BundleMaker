@@ -33,6 +33,10 @@ ATTRIBUTES
   recurse
     Specify the Perl core version to recurse until.
 
+  name
+    Allows to specify a package name for generated bundle. Has "has_"
+    predicate for test whether it's set or not.
+
 METHODS
   make_bundle
 AUTHOR

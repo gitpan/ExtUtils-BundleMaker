@@ -21,7 +21,7 @@ ExtUtils::BundleMaker - Supports making bundles of modules recursively
 
 =cut
 
-our $VERSION = '0.003';
+our $VERSION = '0.004';
 
 =head1 SYNOPSIS
 
@@ -60,6 +60,11 @@ Specifies target for bundle
 =head2 recurse
 
 Specify the Perl core version to recurse until.
+
+=head2 name
+
+Allows to specify a package name for generated bundle. Has C<has_> predicate
+for test whether it's set or not.
 
 =head1 METHODS
 
@@ -104,8 +109,21 @@ option target => (
     format   => "s"
 );
 
+option name => (
+    is        => "ro",
+    doc       => "Allows to specify a package name for generated bundle",
+    format    => "s",
+    predicate => 1,
+);
+
 has _remaining_deps => (
     is        => "lazy",
+    init_args => undef
+);
+
+has _provided => (
+    is        => "ro",
+    default   => sub { {} },
     init_args => undef
 );
 
@@ -157,22 +175,6 @@ has requires => (
     is => "lazy",
 );
 
-my %told;
-
-sub _tell_not_core
-{
-    my ( $m, $v, $cv ) = @_;
-    $told{"$m-$v-$cv"}++ and return;
-    my $ic = Module::CoreList::is_core( $m, $v, $cv );
-    defined $ic or $ic = "n/a";
-    my $di = Module::CoreList::deprecated_in($m);
-    defined $di or $di = "n/a";
-    my $rf = Module::CoreList::removed_from($m);
-    defined $rf or $rf = "n/a";
-    print("$m-$v-$cv: $ic, $di, $rf\n");
-    return;
-}
-
 sub _build_requires
 {
     my $self     = shift;
@@ -223,12 +225,13 @@ sub _build_requires
             }
             else
             {
-                # _tell_not_core($dep, $deps{$dep}, $core_v);
                 defined( $core_req{$dep} ) and version->new( $core_req{$dep} ) > version->new( $deps{$dep} ) and next;
                 $core_req{$dep} = $deps{$dep};
             }
         }
     }
+
+    delete $modules{perl};
 
     # update modules for loader ...
     %{ $self->modules }         = %modules;
@@ -241,7 +244,12 @@ has _bundle_body_stub => ( is => "lazy" );
 
 sub _build__bundle_body_stub
 {
-    my $_body_stub = <<'EOU';
+    my $self       = shift;
+    my $_body_stub = "";
+
+    $self->has_name and $_body_stub .= "package " . $self->name . ";\n\n";
+
+    $_body_stub .= <<'EOU';
 use IPC::Cmd qw(run QUOTE);
 
 sub check_module
@@ -253,6 +261,28 @@ sub check_module
 }
 
 EOU
+
+    my @requires = @{ $self->requires };
+    $self->has_name
+      and $_body_stub .= sprintf
+      <<'EOR', Data::Dumper->new( [ $self->_remaining_deps ] )->Terse(1)->Purity(1)->Useqq(1)->Sortkeys(1)->Dump, Data::Dumper->new( [ $self->_provided ] )->Terse(1)->Purity(1)->Useqq(1)->Sortkeys(1)->Dump, Data::Dumper->new( [ $self->requires ] )->Terse(1)->Purity(1)->Useqq(1)->Sortkeys(1)->Dump;
+sub remaining_deps
+{
+    return %s
+}
+
+sub provided_bundle
+{
+    return %s
+}
+
+sub required_order
+{
+    return %s
+}
+
+EOR
+
     return $_body_stub;
 }
 
@@ -281,7 +311,13 @@ EOU
         $body .= "    \$@ and die \$@;\n";
         $body .= sprintf "    defined \$INC{'%s'} or \$INC{'%s'} = 'Bundled';\n};\n", $mnf, $mnf;
         $body .= "\n";
+
+        $modv = $mod->VERSION;
+        defined $modv or $modv = 0;
+        $modules{$mod} = $modv;
     }
+
+    %{ $self->_provided } = %modules;
 
     return $body;
 }
@@ -295,9 +331,9 @@ sub make_bundle
     my $self   = shift;
     my $target = $self->target;
 
-    my $body = $self->_bundle_body_stub;
-    $body .= $self->_bundle_body;
-    $body .= "\n1;\n";
+    my $body = $self->_bundle_body . "\n1;\n";
+    # stub contains additional information when module is generated
+    $body = $self->_bundle_body_stub . $body;
 
     my $target_dir = dirname($target);
     -d $target_dir or File::Path::make_path($target_dir);

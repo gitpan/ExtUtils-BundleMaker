@@ -4,9 +4,10 @@ Changes
 lib/ExtUtils/BundleMaker.pm
 MANIFEST
 MANIFEST.SKIP
+README
 README.md
 t/00-load.t
 t/01-simple.t
-README
+t/02-pkg.t
 META.yml
 META.json

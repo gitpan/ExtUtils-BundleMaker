@@ -2,15 +2,9 @@ use strict;
 use warnings FATAL => 'all';
 use Module::Build;
 
-# maybe after some patching of MetaCPAN::Client that's reintroduced
-# recommends => {
-#     'CHI'                    => 0,
-#     'HTTP::Tiny::Mech'       => 0,
-#     'WWW::Mechanize::Cached' => 0,
-# },
-
 my $builder = Module::Build->new(
     module_name       => 'ExtUtils::BundleMaker',
+    license           => 'perl',
     dist_author       => q{Jens Rehsack <rehsack@cpan.org>},
     dist_version_from => 'lib/ExtUtils/BundleMaker.pm',
     add_to_cleanup    => ['ExtUtils-BundleMaker-*'],
@@ -53,11 +47,23 @@ my $builder = Module::Build->new(
                     'Params::Util'         => 0,
                     'version'              => 0,
                 },
+                recommends => {
+                    'CHI'                    => 0,
+                    'HTTP::Tiny::Mech'       => 0,
+                    'MetaCPAN::Client'       => '1.003000',
+                    'WWW::Mechanize::Cached' => 0,
+                },
             },
-            build => {
+            test => {
                 requires => {
+                    'Module::Runtime'     => 0,
+                    'Test::Directory'     => 0,
                     'Test::More'          => '0.90',
                     'Test::WriteVariants' => '0.005',
+                },
+                suggests => {
+                    'Config::AutoConf'   => '0.27',
+                    'ExtUtils::CBuilder' => '0.280216'
                 },
             },
         },
