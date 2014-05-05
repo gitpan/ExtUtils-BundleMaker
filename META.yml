@@ -3,23 +3,24 @@ abstract: 'Supports making bundles of modules recursively'
 author:
   - 'Jens Rehsack <rehsack@cpan.org>'
 build_requires:
+  ExtUtils::MakeMaker: '0'
   Module::Runtime: '0'
   Test::Directory: '0'
   Test::More: '0.90'
   Test::WriteVariants: '0.005'
 configure_requires:
-  Module::Build: '0.42'
+  ExtUtils::MakeMaker: '0'
 dynamic_config: 1
-generated_by: 'Module::Build version 0.4205, CPAN::Meta::Converter version 2.141170'
+generated_by: 'ExtUtils::MakeMaker version 6.98, CPAN::Meta::Converter version 2.141170'
 license: perl
 meta-spec:
   url: http://module-build.sourceforge.net/META-spec-v1.4.html
   version: '1.4'
 name: ExtUtils-BundleMaker
-provides:
-  ExtUtils::BundleMaker:
-    file: lib/ExtUtils/BundleMaker.pm
-    version: '0.005'
+no_index:
+  directory:
+    - t
+    - inc
 recommends:
   CHI: '0'
   HTTP::Tiny::Mech: '0'
@@ -42,4 +43,4 @@ resources:
   bugtracker: http://rt.cpan.org/NoAuth/ReportBug.html?Queue=ExtUtils-BundleMaker
   license: http://dev.perl.org/licenses/
   repository: git://github.com/rehsack/ExtUtils-BundleMaker.git
-version: '0.005'
+version: '0.006'
